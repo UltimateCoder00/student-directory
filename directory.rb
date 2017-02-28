@@ -23,8 +23,8 @@ def print_header
 end
 
 def print(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  students.each_with_index do |student, index|
+    puts "#{index + 1} #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
@@ -32,8 +32,73 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
-students = input_students
+def list_filter(students_list)
+  puts "Would you like to filter your student list?"
+  reply = yes_or_no_reply
+
+  if (reply == "yes")
+    return students_filter(students_list)
+  else
+    return students_list
+  end
+end
+
+def yes_or_no_reply
+  while true
+    puts "Please only enter 'yes' or 'no'"
+    reply = gets.chomp.downcase
+
+    if (reply == "no") || (reply == "yes")
+      break
+    end
+  end
+
+  reply
+end
+
+def students_filter(students_list)
+  filtered_students_list = {}
+  puts "Would you like the students names to start with a specific letter?"
+  reply = yes_or_no_reply
+
+  if (reply == "yes")
+    filtered_students_list = student_names_starting_letter(students_list)
+  end
+
+  filtered_students_list
+end
+
+def student_names_starting_letter(students_list)
+  students_list_filtered = []
+  puts "Please specify the letter for the student names to start with"
+  reply = gets.chomp.downcase
+  students_list.each do |student|
+    if student[:name].downcase.to_s.start_with?(reply)
+      students_list_filtered.push(student)
+    end
+  end
+
+  students_list_filtered
+end
+
+ # students = input_students
+
+students = [
+  {name: "Dr. Hannibal Lecter", cohort: :november},
+  {name: "Darth Vader", cohort: :november},
+  {name: "Nurse Ratched", cohort: :november},
+  {name: "Michael Corleone", cohort: :november},
+  {name: "Alex DeLarge", cohort: :november},
+  {name: "The Wicked Witch of the West", cohort: :november},
+  {name: "Terminator", cohort: :november},
+  {name: "Freddy Krueger", cohort: :november},
+  {name: "The Joker", cohort: :november},
+  {name: "Joffrey Baratheon", cohort: :november},
+  {name: "Norman Bates", cohort: :november}
+]
+
+filtered_students = list_filter(students)
 # nothing happens until we call the methods
 print_header
-print(students)
-print_footer(students)
+print(filtered_students)
+print_footer(filtered_students)
