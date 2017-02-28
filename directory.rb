@@ -57,12 +57,20 @@ def yes_or_no_reply
 end
 
 def students_filter(students_list)
-  filtered_students_list = {}
+  filtered_students_list = []
   puts "Would you like the students names to start with a specific letter?"
   reply = yes_or_no_reply
 
   if (reply == "yes")
     filtered_students_list = student_names_starting_letter(students_list)
+    students_list = filtered_students_list
+  end
+
+  puts "Would you like to display student names with 12 or less characters?"
+  reply = yes_or_no_reply
+
+  if (reply == "yes")
+    filtered_students_list = student_names_with_12_chars(students_list)
   end
 
   filtered_students_list
@@ -74,6 +82,18 @@ def student_names_starting_letter(students_list)
   reply = gets.chomp.downcase
   students_list.each do |student|
     if student[:name].downcase.to_s.start_with?(reply)
+      students_list_filtered.push(student)
+    end
+  end
+
+  students_list_filtered
+end
+
+def student_names_with_12_chars(students_list)
+  students_list_filtered = []
+
+  students_list.each do |student|
+    if student[:name].length < 12
       students_list_filtered.push(student)
     end
   end
