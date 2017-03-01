@@ -33,8 +33,42 @@ end
 
 def print(students)
   number = 0
+  string1 = "No   "
+  string2 = "Name"
+  string3 = "Cohort"
+  string4 = "Hobbies"
+  # string5 = "Country of Birth"
+  # string6 = "Heigth"
+
+  max_name_length = 0
+  max_cohort_length = 0
+  max_hobbies_length = 0
+  # max_cob_length = 0
+
+  students.each do |student|
+    if max_name_length < student[:name].length
+      max_name_length = student[:name].length
+    end
+
+    if max_cohort_length < student[:cohort].length
+      max_cohort_length = student[:cohort].length
+    end
+
+    if max_hobbies_length < student[:hobbies].length
+      max_hobbies_length = student[:hobbies].length
+    end
+
+    # if max_cob_length < student[:CountryOfBirth].length
+      # max_cob_length = student[:CountryOfBirth].length
+    # end
+  end
+
+  puts string1 + string2 + " "*(max_name_length - string2.length) + "   " + string3 + " "*(max_cohort_length - string3.length + 8) + "   " + string4 + " "*(max_hobbies_length - string4.length) + "   "
+  puts "--------------------------------------------------------------------------"
   until (number == students.length) do
-    puts "#{number + 1} #{students[number][:name]} (#{students[number][:cohort]} cohort), hobbies: #{students[number][:hobbies]}, Country of Birth: #{students[number][:CountryOfBirth]}, Height: #{students[number][:height]} "
+    puts "#{"%02d" % (number + 1)}   " + "#{students[number][:name]}," + " "*(max_name_length - students[number][:name].length) + "  #{students[number][:cohort]} cohort,"  + " "*(max_cohort_length - students[number][:cohort].length) + "   #{students[number][:CountryOfBirth]},"
+    # puts "Country of Birth: #{students[number][:CountryOfBirth]},"
+    # puts "Height: #{students[number][:height]}"
     number += 1
   end
 
