@@ -6,9 +6,18 @@ def input_students
   # get the first name
   name = gets.chomp
   # while the name is not empty, repeat this code
+  puts "Please enter the students hobbies"
+  hobbies = gets.chomp
+
+  puts "Please enter the students Country of Birth"
+  country_of_birth = gets.chomp
+
+  puts "Please enter the students height"
+  height = gets.chomp
+
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobbies: hobbies, CountryOfBirth: country_of_birth, height: height}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -25,7 +34,7 @@ end
 def print(students)
   number = 0
   until (number == students.length) do
-    puts "#{number + 1} #{students[number][:name]} (#{students[number][:cohort]} cohort)"
+    puts "#{number + 1} #{students[number][:name]} (#{students[number][:cohort]} cohort), hobbies: #{students[number][:hobbies]}, Country of Birth: #{students[number][:CountryOfBirth]}, Height: #{students[number][:height]} "
     number += 1
   end
 
@@ -111,17 +120,17 @@ end
  # students = input_students
 
 students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
+  {name: "Dr. Hannibal Lecter", cohort: :november, hobbies: "Serial Killer", CountryOfBirth: "USA", height: 1.78},
+  {name: "Darth Vader", cohort: :november, hobbies: "Galactic Colonization", CountryOfBirth: "Mexico", height: 1.86},
+  {name: "Nurse Ratched", cohort: :november, hobbies: "Nursing", CountryOfBirth: "USA", height: 1.98},
+  {name: "Michael Corleone", cohort: :november, hobbies: "Mafia", CountryOfBirth: "Canada", height: 1.71},
+  {name: "Alex DeLarge", cohort: :november, hobbies: "Killer", CountryOfBirth: "UK", height: 1.82},
+  {name: "The Wicked Witch of the West", cohort: :november, hobbies: "Wizard", CountryOfBirth: "France", height: 1.77},
+  {name: "Terminator", cohort: :november, hobbies: "Target Elimination", CountryOfBirth: "Germany", height: 1.69},
+  {name: "Freddy Krueger", cohort: :november, hobbies: "Nightware Killer", CountryOfBirth: "Spain", height: 1.75},
+  {name: "The Joker", cohort: :november, hobbies: "Attack Batman", CountryOfBirth: "Brazil", height: 1.74},
+  {name: "Joffrey Baratheon", cohort: :november, hobbies: "King", CountryOfBirth: "India", height: 1.91},
+  {name: "Norman Bates", cohort: :november, hobbies: "Psycho", CountryOfBirth: "China", height: 1.85}
 ]
 
 filtered_students = list_filter(students)
